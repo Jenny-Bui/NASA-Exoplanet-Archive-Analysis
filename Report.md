@@ -32,7 +32,7 @@ Using a combination of Week 10–11 **Pandas** operations and Week 8 **NumPy** s
 * **Duplicate Removal:** `df.drop_duplicates()` to eliminate exact duplicates
 * **Physical Validation:** Boolean indexing to remove rows with invalid physical values
 * **Outlier Detection:** 3×IQR method using NumPy percentile calculations
-* **Temporal Validation:** Filtered discovery years to 1990–2025
+* **Temporal Validation:** Filtered discovery years to reasonable bounds (1990-2025) based on exoplanet discovery history
 
 ---
 
@@ -40,9 +40,9 @@ Using a combination of Week 10–11 **Pandas** operations and Week 8 **NumPy** s
 
 Columns with up to 84% missing values were retained for the following reasons:
 
-* **Astronomical Data Reality:** Missing values often stem from measurement difficulty
-* **Preserving Rare Information:** Sparse columns still offer critical astrophysical context
-* **Method-Specific Limitations:** Different discovery techniques produce different data
+* **Astronomical Data Reality:** Missing values in exoplanet research are often due to measurement difficulty rather than data quality issues. For example, planet temperatures are extremely challenging to measure and require specific observational conditions.  
+* **Preserving Rare Information:** Columns like stellar spectral class, despite 84% missing values, provide crucial astrophysical context for the 16% of cases where data exists. Removing these columns would eliminate valuable scientific information.  
+* **Method-Specific Limitations:** Columns like stellar spectral class, despite 84% missing values, provide crucial astrophysical context for the 16% of cases where data exists. Removing these columns would eliminate valuable scientific information.  
 * **Statistical Power:** Even 20–40% of 9,903 records still yields 1,700–3,500 usable values
 * **Complete Case Analysis Rejected:** Would reduce dataset to fewer than 500 records
 
@@ -79,14 +79,18 @@ Retained 85.2% of original data (8,669 of 9,903 records)
 * **Distribution:** Planetary parameters are right-skewed (mean > median).
 
   * Highest skew: planet mass (CV = 1.77) and orbital period (CV = 1.37)
-* **Physical Insight:** Exoplanet mass spans 2,190×; orbital periods much shorter than Earth's
-* Stellar sample mostly Sun-like stars (median mass \~0.9 M☉)
+  * Stellar parameters show more symmetric distributions, with stellar temperature being slightly left-skewed, indicating our sample is biased toward stars slightly cooler than average.
+* **Physical Insight:** 
+* The wide range in planetary masses (2,190× span from minimum to maximum) reflects the diversity of exoplanet types, from small rocky worlds to massive gas giants.
+* The typical exoplanet in our sample orbits closer to its star than Earth does to the Sun (median orbital period = 8.4 days vs. Earth's 365 days), highlighting the observational **bias toward close-in planets that are easier to detect**.
+* The stellar sample represents primarily main-sequence stars like our Sun, with masses clustered around 0.9 solar masses.
 
 ---
 
 ## Simple Plot Analysis
 
 ### Plot Description
+![image](https://github.com/user-attachments/assets/37008fe4-6a45-4143-876b-3939d74e2c9b)
 
 Scatter plot of log(planet mass) vs discovery year for 1,148 exoplanets.
 
@@ -122,6 +126,7 @@ Analyzed 4 variables simultaneously:
 ---
 
 ### Part c: Analysis and Conclusions
+![image](https://github.com/user-attachments/assets/ad3e4d35-6bab-4667-8c1b-2ef266e2a9d2)
 
 * Planetary temperatures are lower than stellar temperatures (as expected)
 * Moderate correlation: stellar temp vs. planetary temp (r = 0.472)
